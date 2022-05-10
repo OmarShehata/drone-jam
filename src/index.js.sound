@@ -1,0 +1,40 @@
+import imageUrl from '../static/test2.jpeg?url';
+const canvas = document.querySelector("#main");
+import FastDct from './lib/FastDct.js';
+import Sound from './Sound.js';
+import * as Tone from 'tone'
+
+let soundGen = new Sound();
+window.soundGen = soundGen
+
+document.querySelector("#play").onclick = function() {
+  if (soundGen.isPlaying) {
+    soundGen.stop()
+    return
+  }
+
+  const soundArray = []
+  function add(f, w, d, p) {
+    soundArray.push({ freq: f, weight: w, detune: d, phase: p})
+  }
+  add(200, 1, 0, 0)
+  //add(440 * 0.5, 0.0, 0.0, 0)
+
+  soundGen.add(soundArray)
+  soundGen.play()
+
+  //const lfo = new Tone.LFO("4n", 400, 4000).start().toDestination();
+}
+
+const slider = document.querySelector("#slider")
+slider.oninput = function(e) {
+  const value = e.target.value;
+  if (soundGen.oscList.length == 0) return; 
+  const osc = soundGen.oscList[0];
+  osc.partialCount = Math.round(value * 20);
+  //console.log(osc.partialCount)
+  //osc.volume.value = value * 20 - 10;
+  //osc.phase = value * 360
+  //osc.detune.value = value * 100;
+  //osc.frequency.value = 440 + value * 10
+}

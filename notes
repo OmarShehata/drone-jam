@@ -1,0 +1,37 @@
+To Do
+
+* Extract the RGB values of the area clicked on?
+* Convert to DCT
+* Then convert to sound frequencies
+* Then play those? 
+
+
+* Add drag and drop
+* Visualize coefficients in a histogram?
+* Convert list of DCT's to frequencies
+	Given a list of N numbers
+	let N = 20000 (highest frequency)
+	for index i, it is the weight of frequency: Math.round( (i / N) * 20000)
+
+	OK, now you have a list of frequencies you can play. 
+
+	So then you can move your mouse to move a window 
+	mouse wheel to expand or contract this window
+	(multiple windows?)
+
+	click and hold to play. Double click to make it sustained
+
+
+
+* What if my thing generates audio from images...and then I link to satellite imagery or webcams and listen TO THE EARTH
+
+
+BIG IDEA: what if instead of selecting window, you are like painting, visible areas add tot he sound
+
+Theramin notes
+--------------
+
+It works by detecting changes in an electromagnetic field??? So you can tune it by, having it play a note at the end of a scale when your fingers are closed, and beginning of scale when your fingers are open. ANd slowly open them to play across that scale.
+
+That's fucking wild! Imagine building something like that. The instrument is really complicated, but consistent. What sounds can we find in the universe. 
+
