@@ -1,70 +1,63 @@
-import * as Tone from 'tone'
+import * as Tone from "tone";
 
 class Sound {
-	constructor() {
-		this.oscList = [];
-		this.lfoList = [];
+  constructor() {
+    this.oscList = [];
 
-		this.isPlaying = false;
-		this.wave = new Tone.Waveform()
-		Tone.Master.connect(this.wave);
-	}
+    this.isPlaying = false;
+    this.wave = new Tone.Waveform();
+    Tone.Master.connect(this.wave);
+  }
 
-	getWaveData() {
-		return this.wave.getValue(0)
-	}
+  getWaveData() {
+    return this.wave.getValue(0);
+  }
 
-	add(sounds) {
-		this.oscList.forEach(osc => {
-			osc.stop()
-			osc.disconnect()
-		})
-		this.oscList = []
+  add(sounds) {
+    this.oscList.forEach((osc) => {
+      osc.stop();
+      osc.disconnect();
+    });
+    this.oscList = [];
 
-		this.lfoList.forEach(lfo => {
-			lfo.stop()
-			lfo.disconnect()
-		})
+    for (let i = 0; i < sounds.length; i++) {
+      let { freq, weight, detune, phase } = sounds[i];
+      if (weight == undefined) weight = 0;
+      if (detune == undefined) detune = 0;
+      if (phase == undefined) phase = 0;
 
-		for (let i = 0; i < sounds.length; i++) {
-			const { freq, weight, detune, phase } = sounds[i]
+      const osc = new Tone.Oscillator({
+        type: "sine",
+        //partialCount: 0,
+        //frequency: 277,
+        //partials: [3, 2, 1],
+        frequency: freq,
+        volume: weight,
+        detune,
+        phase,
+      });
+      osc.toDestination();
+      this.oscList.push(osc);
+    }
+  }
 
-			const osc = new Tone.Oscillator({
-				type: "sine",
-				partialCount: 0,
-				//frequency: 277,
-				//partials: [3, 2, 1],
-				frequency: freq,
-				volume: weight,
-				detune,
-				phase
-			})
-			osc.toDestination()
-			this.oscList.push(osc)
-		}
+  toggle() {
+    if (this.isPlaying) {
+      this.stop();
+      return;
+    }
 
-		// const lfo = new Tone.LFO("4n", 440, 450).start()
-		// lfo.connect(this.oscList[0].frequency)
-		// this.lfoList.push(lfo)
-	}
+    this.play();
+  }
 
-	toggle() {
-		if (this.isPlaying) {
-			this.stop()
-			return
-		}
-
-		this.play()
-	}
-
-	play() {
-		this.isPlaying = true;
-		this.oscList.forEach(osc => osc.start())
-	}
-	stop() {
-		this.isPlaying = false;
-		this.oscList.forEach(osc => osc.stop())
-	}
+  play() {
+    this.isPlaying = true;
+    this.oscList.forEach((osc) => osc.start());
+  }
+  stop() {
+    this.isPlaying = false;
+    this.oscList.forEach((osc) => osc.stop());
+  }
 }
 
 export default Sound;

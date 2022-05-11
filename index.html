@@ -10,8 +10,13 @@
     <script src="https://cdn.plot.ly/plotly-2.11.1.min.js"></script>
     <script src="/lib/fft.js"></script>
     <script type="module" src="/src/index.js"></script>
-    <input type="range" min="0" max="1" step="0.01" id="slider">
-
+    <div id="container">
+      <canvas id="main"></canvas>
+      <canvas id="wave"></canvas>
+    </div>
+    <br/>
+    <button id="clear">Clear</button>
     <button id="play">Play</button>
+    <div id="plot"></div>
   </body>
 </html>

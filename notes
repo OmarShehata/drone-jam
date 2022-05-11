@@ -1,5 +1,13 @@
 To Do
 
+* Split the image into 100x100 chunks, get the frequencies of each
+	That gives you frequencies from 0 to 10k
+	Along with an x/y
+	Maybe even r/g/b?
+* 
+
+
+
 * Extract the RGB values of the area clicked on?
 * Convert to DCT
 * Then convert to sound frequencies
