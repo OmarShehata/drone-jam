@@ -26,9 +26,78 @@ class Image {
     return { imageData, imageBitmap };
   }
 
-  static generateFrequenciesWhole(imageData) {
+  static generateFrequenciesWhole(imageData, boundingBox) {
   	// Given an image, generate frequencies for the whole thing
-  	
+  	const {width, height, data} = imageData;
+  	const values = []
+  	const indices = []
+  	// Get luminance value across the image 
+  	// but skip black values
+  	// and create a list of indices that tell you where the 
+  	// colored pixels are
+  	for (let x = 0; x < width; x += 1) {
+      for (let y = 0; y < height; y += 1) {
+        const i = (y * width + x) * 4;
+        const r = data[i]
+        const g = data[i + 1]
+        const b = data[i + 2]
+        const luma = (r + g + b) / 3
+        if (luma == 0) {
+        	continue
+        }
+
+        values.push(luma)
+        indices.push(i)
+      }
+    }
+
+    // Generate DCT coefficients
+    const dct = pad(values.slice());
+    const padding = dct.length - values.length;
+    FastDct.fastDctLee.transform(dct);
+
+  	return {
+  		boundingBox,
+  		width,
+  		height,
+  		dct,
+  		padding,
+  		indices
+  	}
+  }
+
+  static regenerateImageWhole(frequencyData) {
+  	const { boundingBox, dct, padding, width, height } = frequencyData
+  	// Get the original values
+  	const dctCopy = dct.slice();
+    FastDct.fastDctLee.inverseTransform(dctCopy);
+
+    let values = dctCopy.slice(0, dctCopy.length - padding);
+    const scale = dctCopy.length / 2;
+    values = values.map(v => v / scale)
+    // Generate image data
+    const canvas = document.createElement("canvas");
+		const newImageData = canvas.getContext("2d").createImageData(width, height)
+
+		let currentX = 0;
+    let currentY = 0;
+    for (let i = 0; i < values.length; i++) {
+    	const X = currentX;
+    	const Y = currentY;
+			const index = (Y * width + X) * 4;
+			newImageData.data[index] = values[i];
+			newImageData.data[index + 1] = values[i];
+			newImageData.data[index + 2] = values[i];
+			newImageData.data[index + 3] = 255;
+
+			currentY ++;
+			if (currentY >= height) {
+				currentY = 0;
+				currentX ++;
+			}
+    }
+
+    return newImageData
   }
 
   static generateFrequencies(imageData, blockSize) {

@@ -1,33 +1,37 @@
 To Do
+* Visualize the sound wave side by side in Sound.js
+* Try an image that is more of a pure tone? 
+* Drag and drop
+* Dropdown of images
+* Make it feel good on mobile
+* Make the image decay somehow?
 
-* Split the image into 100x100 chunks, get the frequencies of each
-	That gives you frequencies from 0 to 10k
-	Along with an x/y
-	Maybe even r/g/b?
-* 
-
-
-
-* Extract the RGB values of the area clicked on?
-* Convert to DCT
-* Then convert to sound frequencies
-* Then play those? 
+* Regenerate whole piece and put it back on canvas
 
 
-* Add drag and drop
-* Visualize coefficients in a histogram?
-* Convert list of DCT's to frequencies
-	Given a list of N numbers
-	let N = 20000 (highest frequency)
-	for index i, it is the weight of frequency: Math.round( (i / N) * 20000)
+* Make sounds fade in & out
+* Ctrl Z?
 
-	OK, now you have a list of frequencies you can play. 
+* Save
 
-	So then you can move your mouse to move a window 
-	mouse wheel to expand or contract this window
-	(multiple windows?)
 
-	click and hold to play. Double click to make it sustained
+
+* Vary the sound
+	my variables are x/y/ (r/g/b) or (h/s/l)
+	detune, phase, vary over time?
+* Is ther ea difference between just playing osc's and triggerAttack() ?
+	Instead of just changing immediately, the sound fades in and out
+	depending on how many frequencies it has?
+What if every stroke is an independent sound? Others fade out slowly
+
+* Dropdown of images, including images with pure notes
+	What would a harmonic series look like? 
+* Slider to cycle through components of the image?
+* Entropy checkbox
+
+
+
+
 
 
 

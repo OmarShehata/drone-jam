@@ -1,5 +1,12 @@
 import * as Tone from "tone";
 
+function map(value, min, max, start, end) {
+  const range = max - min;
+  const temp = (value - min) / range
+
+  return temp * (end - start) + start
+}
+
 class Sound {
   constructor() {
     this.oscList = [];
@@ -11,6 +18,62 @@ class Sound {
 
   getWaveData() {
     return this.wave.getValue(0);
+  }
+
+  playImageFrequencies(frequencyData) {
+  	const MAX_FREQUENCY = 2000
+  	const MIN_FREQUENCY = 50
+  	const RANGE = (MAX_FREQUENCY - MIN_FREQUENCY)
+
+  	const dctWeights = frequencyData.dct
+
+  	let min;
+	let max;
+	for (let i = 0; i < dctWeights.length; i++) {
+	const w = dctWeights[i];
+	if (i == 0) {
+	  min = w;
+	  max = w;
+	}
+	if (w > max) max = w;
+	if (w < min) min = w;
+	}
+
+	let range = max - min
+	if (range == 0) range = 1
+	let frequencies = []
+	const weights = []
+	for (let i = 0; i < dctWeights.length; i++) {
+	    let weight = map(dctWeights[i], min, max, -10, 1)
+	    if (max - min == 0) {
+	    	weight = 0
+	    }
+	    const factor = (i / dctWeights.length)
+
+	    const freq = factor * RANGE + MIN_FREQUENCY
+	    const detune = 0
+	    const phase = 0//factor * 360
+
+	    frequencies.push({
+	    	freq,
+	    	weight,
+	    	detune,
+	    	phase
+	    })
+	  }
+
+	frequencies.sort((a, b) => {
+	    if (a.weight < b.weight) return 1;
+	    if (a.weight > b.weight) return -1;
+	    return 0;
+	  })
+	frequencies = frequencies.slice(4, 8)
+
+	this.frequencies = frequencies
+	this.add(this.frequencies)
+	this.play()
+
+	return frequencies
   }
 
   add(sounds) {
@@ -27,8 +90,8 @@ class Sound {
       if (phase == undefined) phase = 0;
 
       const osc = new Tone.Oscillator({
-        type: "sine",
-        //partialCount: 0,
+        type: "sine4",
+        //partialCount: 4,
         //frequency: 277,
         //partials: [3, 2, 1],
         frequency: freq,

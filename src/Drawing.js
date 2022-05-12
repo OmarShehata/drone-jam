@@ -8,6 +8,8 @@ class Drawing {
 
     const mouse = { x: 0, y: 0, right: false, left: false };
     const lastMouse = { x: 0, y: 0 };
+    const bbox = {minX: null, minY:null, maxX: null, maxY: null}
+
     canvas.addEventListener("mousedown", (e) => {
       if (e.button == 0) {
         mouse.left = true;
@@ -43,12 +45,15 @@ class Drawing {
     this.mouse = mouse;
     this.lastMouse = lastMouse;
     this.imageBitmap = imageBitmap;
+    this.bbox = bbox
 
     const update = () => {
       requestAnimationFrame(update);
 
       const mouseDown = mouse.left || mouse.right;
       if (mouseDown) {
+        this.updateBounds()
+
         const dx = lastMouse.x - mouse.x;
         const dy = lastMouse.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -68,6 +73,46 @@ class Drawing {
       lastMouse.y = mouse.y;
     };
     update();
+  }
+
+  resetBounds() {
+    this.bbox.minX = null;
+    this.bbox.maxX = null;
+    this.bbox.minY = null;
+    this.bbox.maxY = null;
+
+    this.lastMouse.x = 0;
+    this.lastMouse.y = 0;
+    this.mouse.x = 0;
+    this.mouse.y = 0;
+  }
+  updateBounds() {
+    const {bbox,mouse} = this;
+    if (bbox.minX == null) {
+      bbox.minX = mouse.x;
+      bbox.maxX = mouse.x;
+
+      bbox.minY = mouse.y;
+      bbox.maxY = mouse.y;
+    }
+    bbox.minX = Math.min(bbox.minX, mouse.x)
+    bbox.maxX = Math.max(bbox.maxX, mouse.x)
+
+    bbox.minY = Math.min(bbox.minY, mouse.y)
+    bbox.maxY = Math.max(bbox.maxY, mouse.y)
+  }
+
+  drawFull() {
+    const canvas = this.canvas
+    const ctx = this.canvas.getContext("2d");
+    ctx.drawImage(this.imageBitmap, 0, 0, canvas.width, canvas.height)
+
+    const bbox = this.bbox;
+    bbox.minX = 0;
+    bbox.maxX = canvas.width;
+
+    bbox.minY = 0;
+    bbox.maxY = canvas.height
   }
 
   draw(X, Y) {
