@@ -12,7 +12,7 @@ Made for [Drone Jam 2022](https://itch.io/jam/drone).
 
 ## Preview
 
-The video below shows most of the tool's features, including drag & drop to add your own images.
+The video below shows most of the tool's features, including drag & drop to add your own images. **Unmute the video**.
 
 https://user-images.githubusercontent.com/1711126/168429807-9aa8b879-21ab-4c79-8be7-53578844fb44.mp4
 
