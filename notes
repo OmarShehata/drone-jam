@@ -1,17 +1,26 @@
 To Do
+* Make input for sliders work
+* Make auto update work
+* Add a code sandbox
+	Or just use browser console?
 
-* Make sounds fade in & out
+
+
+* Final UI
+	* Clicking on settings brings up the settings panel
+	* Settings panel is just 20% of bottom
+		has scrollbar
+		to push up image, margin-bottom: 20%
+
+	* Pause button icon that changes
+	* Input box for the sliders
+	* Dropdown of images
+	* Drag and drop images
+	* Upload button for images so it works on phones
+
 
 * Reverb?
 	See: https://stackoverflow.com/a/5319085
-* Input box for the sliders
-* Final UI
-	* Top right info button
-	* Image should be full screen
-	* All buttons & sliders in a panel bottom
-* Dropdown of images
-* Drag and drop images
-* Upload button for images so it works on phones
 
 * Put image onto oscilliscope
 	https://sketchfab.com/3d-models/oscilloscope-b49f9080d7ca49d697a80549918b6d09

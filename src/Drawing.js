@@ -10,36 +10,36 @@ class Drawing {
     const lastMouse = { x: 0, y: 0 };
     const bbox = {minX: null, minY:null, maxX: null, maxY: null}
 
-    canvas.addEventListener("mousedown", (e) => {
-      if (e.button == 0) {
-        mouse.left = true;
-      }
-      if (e.button == 2) {
-        mouse.right = true;
-      }
+    // canvas.addEventListener("mousedown", (e) => {
+    //   if (e.button == 0) {
+    //     mouse.left = true;
+    //   }
+    //   if (e.button == 2) {
+    //     mouse.right = true;
+    //   }
 
-      lastMouse.x = mouse.x;
-      lastMouse.y = mouse.y;
-    });
+    //   lastMouse.x = mouse.x;
+    //   lastMouse.y = mouse.y;
+    // });
 
-    canvas.addEventListener("mouseup", async (e) => {
-      if (e.button == 0) {
-        mouse.left = false;
-      }
-      if (e.button == 2) {
-        mouse.right = false;
-      }
-    });
+    // canvas.addEventListener("mouseup", async (e) => {
+    //   if (e.button == 0) {
+    //     mouse.left = false;
+    //   }
+    //   if (e.button == 2) {
+    //     mouse.right = false;
+    //   }
+    // });
 
-    canvas.addEventListener("mousemove", (e) => {
-      const rect = event.target.getBoundingClientRect();
-      let x = event.clientX - rect.left;
-      let y = event.clientY - rect.top;
+    // canvas.addEventListener("mousemove", (e) => {
+    //   const rect = event.target.getBoundingClientRect();
+    //   let x = event.clientX - rect.left;
+    //   let y = event.clientY - rect.top;
 
-      mouse.x = x;
-      mouse.y = y;
-    });
-    canvas.addEventListener("contextmenu", (event) => event.preventDefault());
+    //   mouse.x = x;
+    //   mouse.y = y;
+    // });
+    // canvas.addEventListener("contextmenu", (event) => event.preventDefault());
 
     this.canvas = canvas;
     this.mouse = mouse;
@@ -100,6 +100,10 @@ class Drawing {
 
     bbox.minY = Math.min(bbox.minY, mouse.y)
     bbox.maxY = Math.max(bbox.maxY, mouse.y)
+  }
+
+  setImage(imageBitmap) {
+    this.imageBitmap = imageBitmap
   }
 
   drawFull(size) {
