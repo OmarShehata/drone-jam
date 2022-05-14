@@ -1,7 +1,30 @@
-#container {
-  display: flex;
+html, body {
+  margin: 0px;
+  height: 100%;
+  /*https://www.magicpattern.design/tools/css-backgrounds*/
+  background-color: #363636;
+opacity: 1;
+background-image:  linear-gradient(#5c5c5c 3.4000000000000004px, transparent 3.4000000000000004px), linear-gradient(90deg, #5c5c5c 3.4000000000000004px, transparent 3.4000000000000004px), linear-gradient(#5c5c5c 1.7000000000000002px, transparent 1.7000000000000002px), linear-gradient(90deg, #5c5c5c 1.7000000000000002px, #363636 1.7000000000000002px);
+background-size: 85px 85px, 85px 85px, 17px 17px, 17px 17px;
+background-position: -3.4000000000000004px -3.4000000000000004px, -3.4000000000000004px -3.4000000000000004px, -1.7000000000000002px -1.7000000000000002px, -1.7000000000000002px -1.7000000000000002px;
 }
 
-canvas {
-  border:1px solid black;
+#main {
+  width: 50%;
+  max-width: 1200px;
+  border-radius: 30px;
+}
+
+#container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#settings {
+  position: fixed;
+  bottom: 50px;
+  background-color: white;
+  padding:  20px;
 }

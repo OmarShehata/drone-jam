@@ -1,4 +1,4 @@
-const BRUSH_SIZE = 5;
+const BRUSH_SIZE = 20;
 
 class Drawing {
   constructor(canvas, imageBitmap) {
@@ -102,9 +102,18 @@ class Drawing {
     bbox.maxY = Math.max(bbox.maxY, mouse.y)
   }
 
-  drawFull() {
+  drawFull(size) {
     const canvas = this.canvas
     const ctx = this.canvas.getContext("2d");
+
+    let largerDimension = canvas.width;
+    if (canvas.height > canvas.width) {
+      largerDimension = canvas.height;
+    }
+    const scale = size / largerDimension
+
+    canvas.width *= scale;
+    canvas.height *= scale;
     ctx.drawImage(this.imageBitmap, 0, 0, canvas.width, canvas.height)
 
     const bbox = this.bbox;

@@ -12,12 +12,16 @@
     <script type="module" src="/src/index.js"></script>
     <div id="container">
       <canvas id="main"></canvas>
-      <canvas id="wave"></canvas>
     </div>
-    <br/>
-    <button id="clear">Clear</button>
-    <button id="play">Play</button>
-    <input type="range" id="slider" min="0" max="1" step="0.001">
-    <div id="plot"></div>
+
+    <div id="settings">
+      <button id="clear">Clear</button>
+      <button id="play">Play</button>
+      <button id="harmonize">Harmonize</button>
+      <input id="frequency" value=1>
+      <input type="range" id="min" min="0" max="1" step="0.001">
+      <input type="range" id="max">
+    </div>
+    
   </body>
 </html>

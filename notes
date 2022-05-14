@@ -1,18 +1,31 @@
 To Do
-* Visualize the sound wave side by side in Sound.js
-* Try an image that is more of a pure tone? 
-* Drag and drop
-* Dropdown of images
-* Make it feel good on mobile
-* Make the image decay somehow?
-
-* Regenerate whole piece and put it back on canvas
-
 
 * Make sounds fade in & out
-* Ctrl Z?
 
-* Save
+* Reverb?
+	See: https://stackoverflow.com/a/5319085
+* Input box for the sliders
+* Final UI
+	* Top right info button
+	* Image should be full screen
+	* All buttons & sliders in a panel bottom
+* Dropdown of images
+* Drag and drop images
+* Upload button for images so it works on phones
+
+* Put image onto oscilliscope
+	https://sketchfab.com/3d-models/oscilloscope-b49f9080d7ca49d697a80549918b6d09
+
+* Make the image decay somehow?
+
+* Remove drawing code
+
+
+Name ideas:
+
+* Image Drone
+* Drone Generator
+* The Sound of Sight
 
 
 

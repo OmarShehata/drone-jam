@@ -42,9 +42,9 @@ class Image {
         const g = data[i + 1]
         const b = data[i + 2]
         const luma = (r + g + b) / 3
-        if (luma == 0) {
-        	continue
-        }
+        // if (luma == 0) {
+        // 	continue
+        // }
 
         values.push(luma)
         indices.push(i)
